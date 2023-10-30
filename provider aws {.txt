@@ -15,3 +15,18 @@ sonar.login=
 sonar.password=
 sonar.projectVersion
 sonar.sources=XIE
+
+import json
+import boto3
+s3=boto3.client('s3')
+def lambda_handler(event,context):
+    bucket='buckkexp12'
+    dataToUpload={}
+    dataToUpload['SID']='12'
+    dataToUpload['DEPT']='IT'
+    dataToUpload['NAME']='SHRUTI'
+    dataToUpload['FILE']='Shruti_39'
+    fileName='Shruti_39'+'.json'
+    uploadByteStream=bytes(json.dumps(dataToUpload).encode('UTF-8'))
+    s3.put_object(Bucket=bucket,Key=fileName,Body=uploadByteStream)
+print('Object has been uploaded')
